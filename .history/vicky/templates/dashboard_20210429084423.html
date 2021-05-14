@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<center>
+    <h1>Ayudanos a alimentar a Vicky...</h1>
+
+    <h3>hazle {} preguntas a Vicky y dinos sí el tópico que ella 
+        devuelve es correcto o no...</h3>
+
+    <form action="{% urls home %}">
+        {% csrf_token%}
+        <label for="txt_pregunta_Vicky">Pregunta:</label><br>
+        <input type="text" id="txt_pregunta_Vicky" name="pregunta_Vicky"><br>
+        <input type="submit" value="Preguntar">
+    </form>
+
+</center>
+
+{% endblock %}

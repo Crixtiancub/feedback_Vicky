@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<center>
+    <h1>Se acabararon tus intentos.</h1>
+
+    <h3>Muchas gracias por apoyarnos en nuestro proyecto.</h3>
+
+    {% if comentario != null %}
+
+    <form action="{% url 'noVisitas' %}" method="POST">
+        {% csrf_token%}
+
+        <h5>¿Tienes ideas que puedan sernos de utilidad? Escribenos al respecto:</h5>
+
+        <input type="text" id="txt_comentario" 
+        name="comentario" class="col-sm-8 form-control" 
+        placeholder="Ingresa tu comentario..." required>
+        <br>
+
+        <button type="submit" class="col-sm-2 btn btn-primary">Enviar</button>
+    </form>
+
+    {% endif %}
+    
+</center>
+
+{% endblock %}

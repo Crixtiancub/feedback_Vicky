@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<script text="javascript">
+
+    function enviarPost(url){
+        var formulario = document.frmRespuestaVicky;
+        formulario.action = url;
+        formulario.submit();
+    }
+
+</script>
+
+<center>
+
+    <form action="{% url 'home' %}" method="POST" name="frmRespuestaVicky">
+        {% csrf_token%}
+
+        <h3>Su pregunta para Vicky fue...</h3>
+        <input type="text" aling="center" class="col-sm-8" readonly name="pregunta_Vicky" value="{{ pregunta }}" > 
+        <br>
+        <br>
+
+        <h3>La respuesta Vicky es...</h3>
+        <input type="text" aling="center" class="col-sm-8" readonly name="respuesta_Vicky" value="{{ respuesta }}">
+        <br>
+
+        <h3>Vicky contesto correctamente ?</h3>
+        <br>
+
+        <input type="button" class="col-sm-2 btn btn-primary" value="Si" name="Si" onclick='enviarPost("dashboard.html")'>
+        <input type="button" class="col-sm-2 btn btn-warning" value="No" name="No" onclick='enviarPost("dashboard.html")'>
+    </form>
+
+</center>
+
+{% endblock %}

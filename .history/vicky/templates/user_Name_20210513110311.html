@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<center>
+
+    <form action="{% url 'vicky' %}" method="POST">
+        {% csrf_token%}
+
+        <h3>Para comenzar, por favor ingresa un nombre de usuario...</h3>
+
+        <input type="text" id="txt_user_Name" 
+        name="user_Name" class="col-sm-8 form-control" 
+        placeholder="Ingresa un nombre de usuario..." required>
+
+        <button type="submit" class="col-sm-2 btn btn-primary">Ingresar</button>
+    </form>
+
+</center>
+
+{% endblock %}

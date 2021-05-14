@@ -1,0 +1,72 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<script text="javascript">
+
+    // window.onbeforeunload = function(event) {
+    //     event.preventDefault();
+    //     return false;
+    // }
+	
+	$(document).ready(function(){
+		$("#preguntar").on( "click", function() {
+			$('#target').show(); //muestro mediante id
+		 });
+		$("#responder_Si").on( "click", function() {
+			$('#target').hide(); //oculto mediante id
+		});
+        $("#responder_No").on( "click", function() {
+			$('#target').hide(); //oculto mediante id
+		});
+	});
+        
+</script>
+
+<center>
+    <h1>Ayudanos a alimentar a Vicky...</h1>
+
+    <h3>hazle {{ num_visits }} {%if num_visits == 1%} pregunta{% else %} 
+        preguntas{% endif %}  a Vicky y dinos sí el tópico que ella 
+        devuelve es correcto o no...</h3>
+
+    <form method="POST">
+        {% csrf_token%}
+
+        <div class="form-group">
+            <label for="txt_pregunta_Vicky">Pregunta:</label><br>
+            
+            <input type="text" id="txt_pregunta_Vicky" 
+            name="pregunta_Vicky" class="col-sm-8 form-control" 
+            placeholder="preguntale a Vicky..." pattern="[A-Za-z ?¿]{4,100}"
+            title="Mínimo 4 caracteres, Máximo 100 caracteres. Solo letras (Minús o Mayús)" required>
+
+        </div>
+
+        <input type="submit" id="preguntar" class="btn btn-primary" value="Preguntar">
+    </form>
+
+    <div id="target" style="display: none;">
+        <form action="{% url 'home' %}" method="POST">
+            {% csrf_token%}
+
+            <h3>Su pregunta para Vicky fue...</h3>
+            <input type="text" aling="center" class="col-sm-8" readonly name="retorno_Pregunta" value="{{ pregunta }}" > 
+            <br>
+            <br>
+
+            <h3>La respuesta Vicky es...</h3>
+            <input type="text" aling="center" class="col-sm-8" readonly name="retorno_Respuesta" value="{{ respuesta }}">
+            <br>
+
+            <h3>Vicky contesto correctamente ?</h3>
+            <br>
+
+            <input type="submit" class="col-sm-2 btn btn-primary" id="responder_Si" value="Si" name="Si" >
+            <input type="submit" class="col-sm-2 btn btn-warning" id="responder_No" value="No" name="No" >
+        </form>
+    </div>
+
+</center>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<center>
+
+    <form action="{% url 'home' %}" method="POST"></form>
+
+        <h3>Su pregunta para Vicky fue...</h3>
+        <label name="pregunta_Vicky">{{ pregunta }}</label> 
+        <br>
+        <br>
+
+        <h3>La respuesta Vicky es...</h3>
+        <label name="respuesta_Vicky">{{ respuesta }}</label> 
+        <br>
+
+        <h3>Vicky contesto correctamente ?</h3>
+        <br>
+
+        <input type="submit" class="col-sm-2 btn btn-primary" value="Si" name="Si">
+        <input type="submit" class="col-sm-2 btn btn-warning" value="No" name="No">
+    </form>
+
+</center>
+
+{% endblock %}

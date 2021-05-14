@@ -1,0 +1,95 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div id="form_vicky" class="container text-center">
+
+    [[ $data ]]
+
+    <h1>Ayudanos a alimentar a Vicky...</h1>
+
+    <h3>hazle {{ num_visits }} {%if num_visits == 1%} pregunta{% else %} 
+        preguntas{% endif %}  a Vicky y dinos sí el tópico que ella 
+        devuelve es correcto o no...</h3>  
+
+    <form id="preguntar_Vicky" action="{% url 'home' %}" 
+    :submit.prevent="vue.vista = true" method="POST">
+        {% csrf_token%}
+
+        <div class="form-group">
+            <label for="txt_pregunta_Vicky">Pregunta:</label><br>
+            
+            <input type="text" id="txt_pregunta_Vicky" 
+            name="pregunta_Vicky" v-model="pregunta" class="col-sm form-control" 
+            placeholder="preguntale a Vicky..." required>
+        </div>
+
+        <button id="preguntar" class="btn btn-primary"
+        type="submit">Preguntar</button>
+    </form>
+
+    <br>
+
+    <template v-if="vue.vista">
+
+        <div class="form-group">
+
+            <form action="{% url 'home' %}" 
+            :submit.prevent="vue.vista = null" method="POST">
+                {% csrf_token%}
+
+                <h3>Su pregunta para Vicky fue...</h3>
+                <input type="text" aling="center" class="col-sm-8" 
+                readonly name="retorno_Pregunta" value="{{ pregunta }}" > 
+                <br>
+                <br>
+
+                <h3>La respuesta Vicky es...</h3>
+                <input type="text" aling="center" class="col-sm-8" 
+                readonly name="retorno_Respuesta" value="{{ respuesta }}">
+                <br>
+
+                <h3>Vicky contesto correctamente ?</h3>
+                <br>
+
+                <input type="submit" class="col-sm-2 btn btn-primary"
+                id="responder_Si" value="Si" name="Si">
+                <input type="submit" class="col-sm-2 btn btn-warning"
+                id="responder_No" value="No" name="No">
+            </form>
+
+        </div>
+
+    </template>
+
+</div>
+
+<script>
+
+    // window.onbeforeunload = function(event) {
+    //     event.preventDefault();
+    //     return false;
+    // }
+
+    const app = new Vue({
+        delimiters: ['[[', ']]'],
+        el: '#form_vicky',
+        data: {
+            vue :{
+                vista: null
+            }
+        },
+        methods:{
+            // checkForm: function (e) {
+
+            //     e.preventDefault();
+
+            //     if (!this.pregunta) {
+            //         return false;
+            //     }
+            // }
+        }
+    })        
+</script>
+
+{% endblock %}

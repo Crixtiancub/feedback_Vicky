@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<center>
+
+    <form action="{% url 'home' %}" method="POST">
+        {% csrf_token%}
+
+        <h3>Su pregunta para Vicky fue...</h3>
+        <input type="text" readonly name="pregunta_Vicky" value="{{ pregunta }}" > 
+        <br>
+        <br>
+
+        <h3>La respuesta Vicky es...</h3>
+        <input type="text" readonly name="respuesta_Vicky" value="{{ respuesta }}">
+        <br>
+
+        <h3>Vicky contesto correctamente ?</h3>
+        <br>
+
+        <input type="submit" class="col-sm-2 btn btn-primary" value="Si" name="Si">
+        <input type="submit" class="col-sm-2 btn btn-warning" value="No" name="No">
+    </form>
+
+</center>
+
+{% endblock %}

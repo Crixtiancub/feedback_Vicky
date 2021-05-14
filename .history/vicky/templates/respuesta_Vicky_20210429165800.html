@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<center>
+    <h3>Su pregunta para Vicky fue...</h3>
+    {{ pregunta }}
+    <br>
+    <br>
+
+    <h3>La respuesta Vicky es...</h3>
+    {{ respuesta }}
+    <br>
+
+    <form action="{% url 'home' %}">
+        <h3>Vicky contesto correctamente ?</h3>
+        <br>
+
+        <input type="submit" class="col-sm-2 btn btn-primary" value="Si">
+        <input type="submit" class="col-sm-2 btn btn-warning" value="No">
+    </form>
+
+</center>
+
+{% endblock %}

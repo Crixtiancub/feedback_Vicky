@@ -1,0 +1,113 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<center>
+    <h1>Ayudanos a alimentar a Vicky...</h1>
+
+    <h3>hazle {{ num_visits }} {%if num_visits == 1%} pregunta{% else %} 
+        preguntas{% endif %}  a Vicky y dinos sí el tópico que ella 
+        devuelve es correcto o no...</h3>
+
+    <form id="preguntar_Vicky" action="{% url 'home' %}" method="POST">
+        {% csrf_token%}
+
+        <div class="form-group">
+            <label for="txt_pregunta_Vicky">Pregunta:</label><br>
+            
+            <input type="text" id="txt_pregunta_Vicky" 
+            name="pregunta_Vicky" v-model="pregunta" class="col-sm-8 form-control" 
+            placeholder="preguntale a Vicky..." required>
+        </div>
+
+        <!-- <p v-if="errors.length">
+            <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
+            <ul>
+              <li v-for="error in errors">{{ error }}</li>
+            </ul>
+        </p> -->
+
+        <input type="submit" id="preguntar" class="btn btn-primary" value="Preguntar">
+    </form>
+
+    <br>
+
+    <div id="target" style="display: none;">
+        <form method="POST">
+            {% csrf_token%}
+
+            <h3>Su pregunta para Vicky fue...</h3>
+            <input type="text" aling="center" class="col-sm-8" readonly name="retorno_Pregunta" value="{{ pregunta }}" > 
+            <br>
+            <br>
+
+            <h3>La respuesta Vicky es...</h3>
+            <input type="text" aling="center" class="col-sm-8" readonly name="retorno_Respuesta" value="{{ respuesta }}">
+            <br>
+
+            <h3>Vicky contesto correctamente ?</h3>
+            <br>
+
+            <input type="submit" class="col-sm-2 btn btn-primary" id="responder_Si" value="Si" name="Si" >
+            <input type="submit" class="col-sm-2 btn btn-warning" id="responder_No" value="No" name="No" >
+        </form>
+    </div>
+
+</center>
+
+<script>
+
+    // window.onbeforeunload = function(event) {
+    //     event.preventDefault();
+    //     return false;
+    // }
+
+    // const app = new Vue({
+    //     el: '#preguntar_Vicky',
+    //     data: {
+    //         errors: [],
+    //         pregunta: null,
+    //         view: null
+    //     },
+    //     methods:{
+    //         checkForm: function (e) {
+
+    //             if (this.pregunta) {
+    //                 return true;
+    //             }
+
+    //             this.errors = [];
+
+    //             if (!this.pregunta) {
+    //                 this.errors.push('Por favor, realice una pregunta.');
+    //                 return false
+    //             }
+
+    //             e.preventDefault();
+    //         }
+    //     }
+    // })
+	
+	$(document).ready(function(){
+        $("#preguntar").on("click", function()
+            {
+                $('#target').show();
+
+                event.preventDefault();
+            }
+        );
+
+		$("#responder_Si").on( "click", function() 
+        {
+			$('#target').hide(); //oculto mediante id
+		});
+
+        $("#responder_No").on( "click", function() 
+        {
+			$('#target').hide(); //oculto mediante id
+		});
+	});
+        
+</script>
+
+{% endblock %}
