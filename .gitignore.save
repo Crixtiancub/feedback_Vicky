@@ -1,0 +1,9 @@
+x-special/nautilus-clipboard
+copy
+file:///home/intpcl-119/cosas_interedes/entorno/prueba_Vicky
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings
